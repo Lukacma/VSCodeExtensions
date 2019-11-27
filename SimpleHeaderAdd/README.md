@@ -9,7 +9,7 @@ Adds header file inside inc folder for open source file.
 
 ## Extension Settings
 
-* `extension.AddHeader`: enable/disable this extension
+* `extension.AddHeader`: adds the require header inside the inc folder.
 
 ## Known Issues
 
