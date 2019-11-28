@@ -20,25 +20,7 @@ function activate(context) {
 	// The command has been defined in the package.json file
 	// Now provide   the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.addHeaders', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		var cppPath = vscode.window.activeTextEditor.document.fileName;
-		var cppName = path.basename(cppPath);
-		if (/.*\.cpp/.test(cppName)) {
-			let hppPath = cppPath.replace(/src\/.*/, 'inc/' + cppName.replace(/\.cpp/, '') + '.hpp');
-			fs.writeFileSync(hppPath, '', 'utf8');
-			var openPath = vscode.Uri.file(hppPath); //A request file path
-
-			vscode.workspace.openTextDocument(openPath).then(doc => {
-				vscode.window.showTextDocument(doc);
-			});
-		}
-		else {
-			vscode.window.showErrorMessage("Requires cpp file");
-		}
-	});
+	let disposable = vscode.commands.registerCommand('extension.addHeaders', AddHeader);
 
 	context.subscriptions.push(disposable);
 }
@@ -46,6 +28,25 @@ exports.activate = activate;
 
 // this method is called when your extension is deactivated
 function deactivate() { }
+
+function AddHeader() {
+	var hppPath;
+	var cppPath = vscode.window.activeTextEditor.document.fileName;
+	var cppName = path.basename(cppPath);
+	if (/.*\.cpp/.test(cppName)) {
+		if (/src\//.test(cppPath)) { hppPath = cppPath.replace(/src\/.*/, 'inc/' + cppName.replace(/\.cpp/, '.hpp')); }
+		else { hppPath = cppPath.replace(cppName, cppName.replace(/\.cpp/, '.hpp')); }
+		fs.appendFileSync(hppPath, '', 'utf8');
+		var openPath = vscode.Uri.file(hppPath); //A request file path
+
+		vscode.workspace.openTextDocument(openPath).then(doc => {
+			vscode.window.showTextDocument(doc);
+		});
+	}
+	else {
+		vscode.window.showErrorMessage("Requires cpp file");
+	}
+}
 
 module.exports = {
 	activate,
