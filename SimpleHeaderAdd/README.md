@@ -1,4 +1,4 @@
-#Add Header
+# Add Header
 Extension for quick creation of header files.
 
 ## Features
