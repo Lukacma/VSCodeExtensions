@@ -3,7 +3,7 @@
 	"displayName": "Simple headers",
 	"description": "Add header file corresponding to given cpp file.",
 	"version": "0.0.2",
-	"publisher": "Majo",
+	"publisher": "Marian Lukac",
 	"engines": {
 		"vscode": "^1.40.0"
 	},

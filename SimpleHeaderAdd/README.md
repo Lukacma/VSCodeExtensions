@@ -1,20 +1,15 @@
-##Add Headers
+#Add Header
+Extension for quick creation of header files.
 
 ## Features
-
-Adds header file inside inc folder for open source file.
-
-## Requirements
-
-
-## Extension Settings
-
-* `extension.AddHeader`: adds the require header inside the inc folder.
-
-## Known Issues
-
+* Create header.
+* Create include guards.
 
 ## Release Notes
+
+##### 0.0.2
+Added automatic include guards generation.
+
 
 
 
